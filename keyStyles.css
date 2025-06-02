@@ -134,3 +134,39 @@ p.unique-paragraphs {
   opacity: 0.5;
   cursor: grabbing;
 }
+
+/* Highlight correct letters */
+.correct {
+  color: green;
+  font-weight: bold;
+}
+
+/* Highlight incorrect letters */
+.incorrect {
+  color: red;
+  font-weight: bold;
+}
+
+/* Key styles for drag/drop */
+.key {
+  user-select: none;
+  cursor: grab;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease;
+}
+
+.key.dragging {
+  opacity: 0.6;
+  cursor: grabbing;
+}
+
+.key:hover {
+  background-color: #2563eb;
+}

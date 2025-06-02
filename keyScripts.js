@@ -20,7 +20,7 @@ function normalizeChar(c) {
   return c;
 }
 
-// Load paragraphs from tjhe text file
+// Load paragraphs from the text file
 async function loadParagraphs(filename) {
   try {
     const res = await fetch(filename);
@@ -167,50 +167,58 @@ timerDisplay.textContent = durationSelect.value;
 
 const keyrushKeys = document.querySelector(".keyrush-keys");
 let draggedElement = null;
+let easterEgg = null; // We'll create it dynamically
 
-// Easter egg popup 
-const easterEgg = document.createElement("div");
-easterEgg.id = "easter-egg-popup";
-easterEgg.style.position = "fixed";
-easterEgg.style.top = "50%";
-easterEgg.style.left = "50%";
-easterEgg.style.transform = "translate(-50%, -50%)";
-easterEgg.style.background = "#1d4ed8"; 
-easterEgg.style.color = "#ffffff";
-easterEgg.style.border = "2px solid #1e40af"; 
-easterEgg.style.padding = "20px";
-easterEgg.style.zIndex = "9999";
-easterEgg.style.boxShadow = "0 0 15px rgba(29, 78, 216, 0.7)";
-easterEgg.style.display = "none";
-easterEgg.style.minWidth = "250px";
-easterEgg.style.textAlign = "center";
-easterEgg.style.borderRadius = "12px";
-easterEgg.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+function showEasterEgg() {
+  if (easterEgg) return; // Already shown
 
-// Display easter egg with gif
-easterEgg.innerHTML = `
-  <h2 style="margin-top: 0; margin-bottom: 10px;">🎉 Easter Egg Found! 🎉</h2>
-  <p>You discovered the secret word: <strong>RUSHKEY</strong>!</p>
-  <div style="margin: 15px 0;">
-    <img id="easter-egg-gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Easter Egg GIF" style="max-width: 100%; border-radius: 8px;" />
-  </div>
-  <button id="close-easter-egg" style="
-    background-color:rgb(26, 74, 176); 
-    color: white; 
-    border: none; 
-    padding: 10px 20px; 
-    font-size: 1rem; 
-    border-radius: 6px; 
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  ">Close</button>
-`;
-document.body.appendChild(easterEgg);
+  easterEgg = document.createElement("div");
+  easterEgg.id = "easter-egg-popup";
+  Object.assign(easterEgg.style, {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    background: "#1d4ed8",
+    color: "#ffffff",
+    border: "2px solid #1e40af",
+    padding: "20px",
+    zIndex: "9999",
+    boxShadow: "0 0 15px rgba(29, 78, 216, 0.7)",
+    minWidth: "250px",
+    textAlign: "center",
+    borderRadius: "12px",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  });
 
-const closeBtn = document.getElementById("close-easter-egg");
-closeBtn.addEventListener("click", () => {
-  easterEgg.style.display = "none";
-});
+  easterEgg.innerHTML = `
+    <h2 style="margin-top: 0; margin-bottom: 10px;">🎉 Easter Egg Found! 🎉</h2>
+    <p>You discovered the secret word: <strong>RUSHKEY</strong>!</p>
+    <div style="margin: 15px 0;">
+      <img id="easter-egg-gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Easter Egg GIF" style="max-width: 100%; border-radius: 8px;" />
+    </div>
+    <button id="close-easter-egg" style="
+      background-color: rgb(26, 74, 176);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    ">Close</button>
+  `;
+
+  document.body.appendChild(easterEgg);
+
+  const closeBtn = document.getElementById("close-easter-egg");
+  closeBtn.addEventListener("click", () => {
+    if (easterEgg) {
+      easterEgg.remove();
+      easterEgg = null;
+    }
+  });
+}
 
 function handleDragStart(e) {
   draggedElement = e.target;
@@ -251,14 +259,12 @@ function enableDragDrop() {
   });
 }
 
-// Check if h1 spells "RUSHKEY"
 function checkForEasterEgg() {
-  const letters = [...keyrushKeys.querySelectorAll(".key")].map(k => k.textContent).join("");
-  if (letters === "RUSHKEY") {
-    easterEgg.style.display = "block";
+  const keys = keyrushKeys.querySelectorAll(".key");
+  const currentSequence = Array.from(keys).map(k => k.textContent.trim()).join("");
+  if (currentSequence.toUpperCase() === "RUSHKEY") {
+    showEasterEgg();
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  enableDragDrop();
-});
+enableDragDrop();
