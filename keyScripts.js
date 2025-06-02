@@ -20,7 +20,7 @@ function normalizeChar(c) {
   return c;
 }
 
-// Load paragraphs from the text file
+// Load paragraphs from the text file 
 async function loadParagraphs(filename) {
   try {
     const res = await fetch(filename);
@@ -73,7 +73,6 @@ async function startTest() {
   }, 1000);
 }
 
-// End the test and show results
 function endTest() {
   clearInterval(timer);
   started = false;
@@ -275,8 +274,170 @@ const hoverText = originalText.replace('KEYRUSH', 'RUSHKEY');
 
 footerText.addEventListener('mouseenter', () => {
   footerText.textContent = hoverText;
+  footerText.setAttribute('title', '???');  
 });
 
 footerText.addEventListener('mouseleave', () => {
   footerText.textContent = originalText;
+  footerText.removeAttribute('title');      
+});
+
+
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsMenu = document.getElementById('settings-menu');
+const themeForm = document.getElementById('theme-form');
+
+let memeContainer;
+let animationId;
+let memesData = [];
+
+settingsToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  settingsMenu.classList.toggle('hidden');
+});
+
+document.addEventListener('click', (e) => {
+  if (!settingsMenu.contains(e.target) && !settingsToggle.contains(e.target)) {
+    settingsMenu.classList.add('hidden');
+  }
+});
+
+function clearMemes() {
+  if (memeContainer) {
+    memeContainer.remove();
+    memeContainer = null;
+  }
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+  memesData = [];
+}
+
+function startMemeMode() {
+  document.body.style.backgroundImage = "url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExODg1YjJsZXRsanBuNnhna3I4bGJ3YjZndXpxNWE3M241dGUwZ2NycyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vuw9m5wXviFIQ/giphy.gif')";
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundRepeat = 'no-repeat';
+  document.body.style.backgroundPosition = 'center';
+
+  memeContainer = document.createElement('div');
+  memeContainer.id = 'meme-container';
+  document.body.appendChild(memeContainer);
+
+  const memes = [
+    '/images/image1.png',
+    '/images/image2.png',
+    '/images/image3.png',
+    '/images/image4.png',
+    '/images/image5.png',
+    '/images/image6.png',
+    '/images/image7.png',
+    '/images/image8.png',
+    '/images/image9.png',
+    '/images/image10.png',
+  ];
+
+  const shuffledMemes = memes.sort(() => Math.random() - 0.5).slice(0, 10);
+  memesData = [];
+
+  for (let i = 0; i < 10; i++) {
+    const img = document.createElement('img');
+    img.src = shuffledMemes[i];
+    img.classList.add('floating-meme');
+
+    const posX = Math.random() * (window.innerWidth - 80);
+    const posY = Math.random() * (window.innerHeight - 80);
+
+    img.style.left = `${posX}px`;
+    img.style.top = `${posY}px`;
+
+    memeContainer.appendChild(img);
+
+    const velocityX = (Math.random() * 2 + 1.5) * (Math.random() < 0.5 ? 1 : -1);
+    const velocityY = (Math.random() * 2 + 1.5) * (Math.random() < 0.5 ? 1 : -1);
+
+    const meme = {
+      img,
+      posX,
+      posY,
+      velocityX,
+      velocityY,
+      isDragging: false,
+      offsetX: 0,
+      offsetY: 0
+    };
+
+    img.addEventListener('mousedown', (e) => {
+      meme.isDragging = true;
+      meme.offsetX = e.clientX - meme.posX;
+      meme.offsetY = e.clientY - meme.posY;
+      e.preventDefault();
+    });
+
+    document.addEventListener('mouseup', () => {
+      meme.isDragging = false;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (meme.isDragging) {
+        meme.posX = e.clientX - meme.offsetX;
+        meme.posY = e.clientY - meme.offsetY;
+        meme.img.style.left = `${meme.posX}px`;
+        meme.img.style.top = `${meme.posY}px`;
+      }
+    });
+
+    memesData.push(meme);
+  }
+
+  function animate() {
+    memesData.forEach((meme) => {
+      if (!meme.isDragging) {
+        meme.posX += meme.velocityX;
+        meme.posY += meme.velocityY;
+
+        if (meme.posX <= 0 || meme.posX + 80 >= window.innerWidth) {
+          meme.velocityX *= -1;
+          meme.posX = Math.max(0, Math.min(meme.posX, window.innerWidth - 80));
+        }
+
+        if (meme.posY <= 0 || meme.posY + 80 >= window.innerHeight) {
+          meme.velocityY *= -1;
+          meme.posY = Math.max(0, Math.min(meme.posY, window.innerHeight - 80));
+        }
+
+        meme.img.style.left = `${meme.posX}px`;
+        meme.img.style.top = `${meme.posY}px`;
+      }
+    });
+
+    animationId = requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+themeForm.addEventListener('change', (e) => {
+  if (e.target.name === 'theme') {
+    document.body.classList.remove('light-mode', 'dark-mode', 'default-mode', 'meme-mode');
+    clearMemes();
+
+    document.body.style.backgroundImage = '';
+
+    switch (e.target.value) {
+      case 'light':
+        document.body.classList.add('light-mode');
+        break;
+      case 'meme':
+        document.body.classList.add('meme-mode');
+        startMemeMode();
+        break;
+      case 'default':
+        document.body.classList.add('default-mode');
+        break;
+    }
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('default-mode');
 });

@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>⌨️ KEYRUSH - Typing Speed Test</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-  <link rel="stylesheet" href="keyStyles.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+  <link rel="stylesheet" href="keyStyles.css" />
 </head>
 <body>
   <main class="container">
@@ -29,10 +28,18 @@
         <option value="30">30 seconds</option>
       </select>
 
-      <p><strong>Time Left:</strong> <span id="timer">15</span> seconds</p>
+      <p>
+        <strong>Time Left:</strong> <span id="timer">15</span> seconds
+      </p>
+
       <div id="test-area"></div>
 
-      <textarea id="user-input" rows="4" placeholder="Click 'Start Test' to begin..." disabled></textarea>
+      <textarea
+        id="user-input"
+        rows="4"
+        placeholder="Click 'Start Test' to begin..."
+        disabled
+      ></textarea>
 
       <div>
         <button id="start-btn" class="contrast">Start Test</button>
@@ -41,14 +48,42 @@
 
       <div class="hidden" id="results"></div>
     </section>
+
+    <div id="settings-wrapper">
+      <button id="settings-toggle" aria-label="Settings">
+        <span style="font-size: 24px;">⚙️</span>
+      </button>
+
+      <div id="settings-menu" class="hidden">
+        <h4>⚙️ Settings</h4>
+
+        <form id="theme-form">
+          <label>
+            <input type="radio" name="theme" checked />
+            Default
+          </label>
+
+          <label>
+            <input type="radio" name="theme" value="light" />
+            Light Mode
+          </label>
+          <br />
+
+          <label>
+            <input type="radio" name="theme" value="meme" />
+            Meme Mode
+          </label>
+          <br />
+        </form>
+      </div>
+    </div>
   </main>
 
-    <footer class="container contrast" role="contentinfo" style="text-align:center; padding:1rem 0;">
-        <div style="font-size: 0.6rem">By Nicholas Gaudon</div>
-        <div>&bull; KEYRUSH 2025 &bull;</div>
-    </footer>
+  <footer class="container contrast" role="contentinfo" style="text-align:center; padding:1rem 0;">
+    <div style="font-size: 0.6rem">By Nicholas Gaudon</div>
+    <div>&bull; KEYRUSH 2025 &bull;</div>
+  </footer>
 
-
-    <script src="keyScripts.js"></script>
+  <script src="keyScripts.js"></script>
 </body>
 </html>
