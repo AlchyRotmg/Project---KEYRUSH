@@ -324,16 +324,16 @@ function startMemeMode() {
   document.body.appendChild(memeContainer);
 
 const memes = [
-  '/Project---KEYRUSH/images/image1.png',
-  '/Project---KEYRUSH/images/image2.png',
-  '/Project---KEYRUSH/images/image3.png',
-  '/Project---KEYRUSH/images/image4.png',
-  '/Project---KEYRUSH/images/image5.png',
-  '/Project---KEYRUSH/images/image6.png',
-  '/Project---KEYRUSH/images/image7.png',
-  '/Project---KEYRUSH/images/image8.png',
-  '/Project---KEYRUSH/images/image9.png',
-  '/Project---KEYRUSH/images/image10.png',
+  'Project---KEYRUSH/images/image1.png',
+  'Project---KEYRUSH/images/image2.png',
+  'Project---KEYRUSH/images/image3.png',
+  'Project---KEYRUSH/images/image4.png',
+  'Project---KEYRUSH/images/image5.png',
+  'Project---KEYRUSH/images/image6.png',
+  'Project---KEYRUSH/images/image7.png',
+  'Project---KEYRUSH/images/image8.png',
+  'Project---KEYRUSH/images/image9.png',
+  'Project---KEYRUSH/images/image10.png',
 ];
 
 
