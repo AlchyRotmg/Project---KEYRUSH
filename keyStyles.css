@@ -147,7 +147,6 @@ p.unique-paragraphs {
   font-weight: bold;
 }
 
-/* Key styles for drag/drop */
 .key {
   user-select: none;
   cursor: grab;

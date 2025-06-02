@@ -268,3 +268,15 @@ function checkForEasterEgg() {
 }
 
 enableDragDrop();
+
+const footerText = document.querySelector('footer.container.contrast > div:nth-child(2)');
+const originalText = footerText.textContent;
+const hoverText = originalText.replace('KEYRUSH', 'RUSHKEY');
+
+footerText.addEventListener('mouseenter', () => {
+  footerText.textContent = hoverText;
+});
+
+footerText.addEventListener('mouseleave', () => {
+  footerText.textContent = originalText;
+});
