@@ -324,16 +324,16 @@ function startMemeMode() {
   document.body.appendChild(memeContainer);
 
 const memes = [
-  'https://i.imgur.com/1f8pZtQ.png',
-  'https://i.imgur.com/w3duR07.png',
-  'https://i.imgur.com/8Km9tLL.png',
-  'https://i.imgur.com/zi6kI1N.png',
-  'https://i.imgur.com/xH2X3jS.png',
-  'https://i.imgur.com/2cYdW1F.png',
-  'https://i.imgur.com/tGbaZCY.png',
-  'https://i.imgur.com/M9Gg3GA.png',
-  'https://i.imgur.com/XSA2Oom.png',
-  'https://i.imgur.com/Vz9W3AA.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image1.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image2.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image3.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image4.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image5.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image6.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image7.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image8.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image9.png',
+  'https://alchyrotmg.github.io/Project---KEYRUSH/images/image10.png',
 ];
 
 
