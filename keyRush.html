@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⌨️ KEYRUSH - Typing Speed Test</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <link rel="stylesheet" href="keyStyles.css">
+
+</head>
+<body>
+  <main class="container">
+    <h1 class="keyrush-keys" aria-label="Keyrush typing speed test">
+      <span class="key" aria-hidden="true">K</span>
+      <span class="key" aria-hidden="true">E</span>
+      <span class="key" aria-hidden="true">Y</span>
+      <span class="key" aria-hidden="true">R</span>
+      <span class="key" aria-hidden="true">U</span>
+      <span class="key" aria-hidden="true">S</span>
+      <span class="key" aria-hidden="true">H</span>
+    </h1>
+
+    <p class="unique-paragraphs">Over 500 Unique Paragraphs!</p>
+
+    <section>
+      <label for="test-duration"><strong>Select Test Duration:</strong></label>
+      <select id="test-duration" name="test-duration" aria-label="Select test duration">
+        <option value="15" selected>15 seconds</option>
+        <option value="30">30 seconds</option>
+      </select>
+
+      <p><strong>Time Left:</strong> <span id="timer">15</span> seconds</p>
+      <div id="test-area"></div>
+
+      <textarea id="user-input" rows="4" placeholder="Click 'Start Test' to begin..." disabled></textarea>
+
+      <div>
+        <button id="start-btn" class="contrast">Start Test</button>
+        <button id="reset-btn">Reset</button>
+      </div>
+
+      <div class="hidden" id="results"></div>
+    </section>
+  </main>
+
+    <footer class="container contrast" role="contentinfo" style="text-align:center; padding:1rem 0;">
+        <div style="font-size: 0.6rem">By Nicholas Gaudon — Student #: 20178833</div>
+        <div>&bull; KEYRUSH 2025 &bull;</div>
+    </footer>
+
+
+    <script src="keyScripts.js"></script>
+</body>
+</html>

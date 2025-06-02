@@ -1,0 +1,136 @@
+#test-area {
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  min-height: 4rem;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+  text-decoration: underline;
+}
+
+#user-input {
+  font-family: monospace;
+  width: 100%;
+  resize: vertical;
+  margin-bottom: 1rem;
+}
+
+.stats {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+button#start-15-btn,
+button#start-30-btn {
+  margin-right: 0.5rem;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main.container {
+  flex: 1 0 auto;
+}
+
+footer.container {
+  flex-shrink: 0;
+}
+
+@keyframes rainbow {
+  0% { color: #ff0000; }
+  14% { color: #ff7f00; }
+  28% { color: #ffff00; }
+  42% { color: #00ff00; }
+  57% { color: #0000ff; }
+  71% { color: #4b0082; }
+  85% { color: #9400d3; }
+  100% { color: #ff0000; }
+}
+
+.keyrush-keys {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.keyrush-keys .key {
+  background: var(--contrast);
+  border-radius: 6px;
+  border: 2px solid var(--contrast);
+  font-family: monospace, monospace;
+  font-weight: 700;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.2);
+  user-select: none;
+  cursor: default;
+  transform-origin: center bottom;
+  animation-name: wave, rainbow;
+  animation-duration: 2.8s, 5s;
+  animation-iteration-count: infinite, infinite;
+  animation-timing-function: ease-in-out, linear;
+  animation-direction: alternate, normal;
+}
+
+.keyrush-keys .key:nth-child(1) { animation-delay: 0s, 0s; }
+.keyrush-keys .key:nth-child(2) { animation-delay: 0.4s, 0s; }
+.keyrush-keys .key:nth-child(3) { animation-delay: 0.8s, 0s; }
+.keyrush-keys .key:nth-child(4) { animation-delay: 1.2s, 0s; }
+.keyrush-keys .key:nth-child(5) { animation-delay: 1.6s, 0s; }
+.keyrush-keys .key:nth-child(6) { animation-delay: 2.0s, 0s; }
+.keyrush-keys .key:nth-child(7) { animation-delay: 2.4s, 0s; }
+
+@keyframes wave {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 3px 6px rgb(0 0 0 / 0.2);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+    box-shadow: 0 10px 15px rgb(0 0 0 / 0.3);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 3px 6px rgb(0 0 0 / 0.2);
+  }
+}
+
+p.unique-paragraphs {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--contrast);
+  font-style: italic;
+}
+
+.rainbow-text {
+  animation: rainbow 5s linear infinite;
+  font-weight: bold;
+}
+
+.key.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
