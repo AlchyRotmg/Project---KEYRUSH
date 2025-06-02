@@ -333,7 +333,7 @@ function startMemeMode() {
     'images/image7.png',
     'images/image8.png',
     'images/image9.png',
-    '/images/image10.png',
+    'images/image10.png',
   ];
 
   const shuffledMemes = memes.sort(() => Math.random() - 0.5).slice(0, 10);
