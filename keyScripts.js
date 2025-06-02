@@ -167,10 +167,10 @@ timerDisplay.textContent = durationSelect.value;
 
 const keyrushKeys = document.querySelector(".keyrush-keys");
 let draggedElement = null;
-let easterEgg = null; // We'll create it dynamically
+let easterEgg = null; 
 
 function showEasterEgg() {
-  if (easterEgg) return; // Already shown
+  if (easterEgg) return; 
 
   easterEgg = document.createElement("div");
   easterEgg.id = "easter-egg-popup";
