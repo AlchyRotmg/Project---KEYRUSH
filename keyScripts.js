@@ -323,18 +323,18 @@ function startMemeMode() {
   memeContainer.id = 'meme-container';
   document.body.appendChild(memeContainer);
 
-  const memes = [
-    'images/image1.png',
-    'images/image2.png',
-    'images/image3.png',
-    'images/image4.png',
-    'images/image5.png',
-    'images/image6.png',
-    'images/image7.png',
-    'images/image8.png',
-    'images/image9.png',
-    'images/image10.png',
-  ];
+const memes = [
+  './images/image1.png',
+  './images/image2.png',
+  './images/image3.png',
+  './images/image4.png',
+  './images/image5.png',
+  './images/image6.png',
+  './images/image7.png',
+  './images/image8.png',
+  './images/image9.png',
+  './images/image10.png',
+];
 
   const shuffledMemes = memes.sort(() => Math.random() - 0.5).slice(0, 10);
   memesData = [];
