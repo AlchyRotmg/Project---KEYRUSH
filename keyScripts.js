@@ -178,7 +178,7 @@ function showEasterEgg() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    background: "#1d4ed8",
+    background: "#13171F",
     color: "#ffffff",
     border: "2px solid #1e40af",
     padding: "20px",
@@ -197,7 +197,7 @@ function showEasterEgg() {
       <img id="easter-egg-gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Easter Egg GIF" style="max-width: 100%; border-radius: 8px;" />
     </div>
     <button id="close-easter-egg" style="
-      background-color: rgb(26, 74, 176);
+      background-color:rgb(37, 47, 67);
       color: white;
       border: none;
       padding: 10px 20px;
