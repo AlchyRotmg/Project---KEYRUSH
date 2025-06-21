@@ -22,7 +22,7 @@ How To Setup:
  - Click Install next to Live Server by Ritwick Dey.
 
  2. Download the project's .zip file:
- - https://github.com/AlchyRotmg/Project---KEYRUSH/archive/refs/heads/main.zip 
+    - https://github.com/AlchyRotmg/Project---KEYRUSH/archive/refs/heads/main.zip 
 
  3. Export the zip file after downloading by right clicking the .zip file and selecting 'Export'.
 
@@ -31,6 +31,6 @@ How To Setup:
  5. Navigate to the index.html file in Visual Studio Code.
 
  6. Click "Go Live" in the bottom right of your Visual Studio Code window.
-  - This should pop out a browser window with a local server to use the project.
+    - This should pop out a browser window with a local server to use the project.
 
  7. Enjoy the project!
