@@ -28,9 +28,9 @@ How To Setup:
 
  4. Open the unpacked folder in Visual Studio Code.
 
- 3. Navigate to the index.html file in Visual Studio Code.
+ 5. Navigate to the index.html file in Visual Studio Code.
 
- 4. Click "Go Live" in the bottom right of your Visual Studio Code window.
+ 6. Click "Go Live" in the bottom right of your Visual Studio Code window.
   - This should pop out a browser window with a local server to use the project.
 
- 5. Enjoy the project!
+ 7. Enjoy the project!
