@@ -26,11 +26,11 @@ How To Setup:
 
  3. Unpack the zip file after downloading.
 
- 4. Open the unpacked folder in Visual Studio Code
+ 4. Open the unpacked folder in Visual Studio Code.
 
- 3. Navigate to the index.html file.
+ 3. Navigate to the index.html file in Visual Studio Code.
 
  4. Click "Go Live" in the bottom right of your Visual Studio Code window.
-  - This should pop out a browser window with a local server to use the project
+  - This should pop out a browser window with a local server to use the project.
 
  5. Enjoy the project!
