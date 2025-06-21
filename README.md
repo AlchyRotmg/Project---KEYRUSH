@@ -24,7 +24,7 @@ How To Setup:
  2. Download the project's .zip file:
  - https://github.com/AlchyRotmg/Project---KEYRUSH/archive/refs/heads/main.zip 
 
- 3. Unapack the zip file after downloading.
+ 3. Unpack the zip file after downloading.
 
  4. Open the unpacked folder in Visual Studio Code
 
