@@ -1,4 +1,5 @@
-const testArea = document.getElementById("test-area");
+// Getting all the main elements we need for the typing test
+const testArea = document.getElementById("test-area"); 
 const userInput = document.getElementById("user-input");
 const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
@@ -6,6 +7,7 @@ const timerDisplay = document.getElementById("timer");
 const results = document.getElementById("results");
 const durationSelect = document.getElementById("test-duration");
 
+// Some variables for keeping track of game state
 let paragraphs = [];
 let timer = null;
 let timeLeft = 15;
@@ -14,39 +16,40 @@ let started = false;
 let incorrectKeystrokes = 0;
 let startTime = null;
 
-// Convert apostrophes to avoid mismatching which leads to incorrect keystrokes (' vs. ’)
+// Helper to normalize weird apostrophes so they don't count as mistakes
 function normalizeChar(c) {
   if (c === '’' || c === '‘') return "'";
   return c;
 }
 
-// Load paragraphs from the text file 
+// Load a list of paragraphs from a file
 async function loadParagraphs(filename) {
   try {
     const res = await fetch(filename);
     const text = await res.text();
     paragraphs = text
       .split(/\r?\n/)
-      .filter(line => line.trim().length > 0);
+      .filter(line => line.trim().length > 0); // strip empty lines
   } catch (err) {
     console.error("Failed to load paragraphs:", err);
   }
 }
 
-// Pick a random paragraph in the text file
+// Get a random paragraph and show it on the screen
 function pickRandomParagraph() {
   const idx = Math.floor(Math.random() * paragraphs.length);
   referenceText = paragraphs[idx];
   testArea.textContent = referenceText;
 }
 
+// Start the typing test timer and set everything up
 async function startTest() {
   if (started) return;
 
   timeLeft = parseInt(durationSelect.value, 10);
   timerDisplay.textContent = timeLeft;
 
-  // Load paragraphs file based on time drop down
+  // Load the correct file for 15s or 30s tests
   const filename = timeLeft === 15 ? "paragraphs15.txt" : "paragraphs30.txt";
   await loadParagraphs(filename);
 
@@ -55,8 +58,8 @@ async function startTest() {
     return;
   }
 
-  clearInterval(timer);
-  results.innerHTML = "";
+  clearInterval(timer); 
+  results.innerHTML = ""; 
   incorrectKeystrokes = 0;
   userInput.value = "";
   userInput.disabled = false;
@@ -66,6 +69,7 @@ async function startTest() {
   startTime = new Date();
   pickRandomParagraph();
 
+  // Start the countdown timer
   timer = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = timeLeft;
@@ -73,8 +77,9 @@ async function startTest() {
   }, 1000);
 }
 
+// End the test, calculate results like WPM and accuracy
 function endTest() {
-  clearInterval(timer);
+  clearInterval(timer); 
   started = false;
   userInput.disabled = true;
 
@@ -96,6 +101,7 @@ function endTest() {
     }
   }
 
+  // Account for extra or missing chars
   if (typed.length > referenceText.length) {
     incorrectKeystrokes += typed.length - referenceText.length;
   }
@@ -115,7 +121,7 @@ function endTest() {
   results.classList.remove("hidden");
 }
 
-// Highlight keystrokes
+// Highlight the correct and incorrect chars as you type
 function highlightInput() {
   const input = userInput.value;
   let html = "";
@@ -135,15 +141,16 @@ function highlightInput() {
 
   testArea.innerHTML = html;
 
-  // End the test if input matches the length of the paragraph
+  // End the test if the entire text was typed
   if (input.length === referenceText.length) {
     endTest();
   }
 }
 
+// Reset the test back to the beginning
 function resetTest() {
-  clearInterval(timer);
-  timeLeft = parseInt(durationSelect.value, 10);
+  clearInterval(timer); 
+  timeLeft = parseInt(durationSelect.value, 10); 
   timerDisplay.textContent = timeLeft;
   started = false;
   userInput.disabled = true;
@@ -152,6 +159,7 @@ function resetTest() {
   testArea.textContent = "Click 'Start Test' to begin...";
 }
 
+// Wire up all the button and input events
 startBtn.addEventListener("click", startTest);
 resetBtn.addEventListener("click", resetTest);
 userInput.addEventListener("input", () => {
@@ -162,12 +170,14 @@ userInput.disabled = true;
 testArea.textContent = "Click 'Start Test' to begin...";
 timerDisplay.textContent = durationSelect.value;
 
-// Section for easter egg drag n drop
+// ========== Drag and drop secret easter egg section ==========
 
+// Grab the keys container and some state vars
 const keyrushKeys = document.querySelector(".keyrush-keys");
 let draggedElement = null;
 let easterEgg = null; 
 
+// Show the RUSHKEY easter egg popup
 function showEasterEgg() {
   if (easterEgg) return; 
 
@@ -219,6 +229,7 @@ function showEasterEgg() {
   });
 }
 
+// Drag event handlers for the keys
 function handleDragStart(e) {
   draggedElement = e.target;
   e.dataTransfer.effectAllowed = "move";
@@ -248,6 +259,7 @@ function handleDragEnd(e) {
   checkForEasterEgg();
 }
 
+// Make all the keys draggable
 function enableDragDrop() {
   const keys = keyrushKeys.querySelectorAll(".key");
   keys.forEach(key => {
@@ -258,6 +270,7 @@ function enableDragDrop() {
   });
 }
 
+// Check if the keys spell "RUSHKEY"
 function checkForEasterEgg() {
   const keys = keyrushKeys.querySelectorAll(".key");
   const currentSequence = Array.from(keys).map(k => k.textContent.trim()).join("");
@@ -268,6 +281,7 @@ function checkForEasterEgg() {
 
 enableDragDrop();
 
+// Change the footer text on hover just for fun
 const footerText = document.querySelector('footer.container.contrast > div:nth-child(2)');
 const originalText = footerText.textContent;
 const hoverText = originalText.replace('KEYRUSH', 'RUSHKEY');
@@ -282,6 +296,7 @@ footerText.addEventListener('mouseleave', () => {
   footerText.removeAttribute('title');      
 });
 
+// ========== Theme menu stuff ==========
 
 const settingsToggle = document.getElementById('settings-toggle');
 const settingsMenu = document.getElementById('settings-menu');
@@ -291,6 +306,7 @@ let memeContainer;
 let animationId;
 let memesData = [];
 
+// Toggle the settings menu open/closed
 settingsToggle.addEventListener('click', (e) => {
   e.stopPropagation();
   settingsMenu.classList.toggle('hidden');
@@ -302,6 +318,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Clear all floating memes if meme mode is off
 function clearMemes() {
   if (memeContainer) {
     memeContainer.remove();
@@ -313,6 +330,7 @@ function clearMemes() {
   memesData = [];
 }
 
+// Start up the goofy meme mode background and floating memes
 function startMemeMode() {
   document.body.style.backgroundImage = "url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExODg1YjJsZXRsanBuNnhna3I4bGJ3YjZndXpxNWE3M241dGUwZ2NycyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vuw9m5wXviFIQ/giphy.gif')";
   document.body.style.backgroundSize = 'cover';
@@ -336,12 +354,10 @@ function startMemeMode() {
     'https://alchyrotmg.github.io/Project---KEYRUSH/images/image10.png',
   ];
 
-
-
-
   const shuffledMemes = memes.sort(() => Math.random() - 0.5).slice(0, 10);
   memesData = [];
 
+  // Make 10 floating meme images that bounce around and can be dragged
   for (let i = 0; i < 10; i++) {
     const img = document.createElement('img');
     img.src = shuffledMemes[i];
@@ -392,6 +408,7 @@ function startMemeMode() {
     memesData.push(meme);
   }
 
+  // Make all memes bounce around the screen
   function animate() {
     memesData.forEach((meme) => {
       if (!meme.isDragging) {
@@ -419,11 +436,11 @@ function startMemeMode() {
   animate();
 }
 
+// Change theme based on radio inputs
 themeForm.addEventListener('change', (e) => {
   if (e.target.name === 'theme') {
     document.body.classList.remove('light-mode', 'dark-mode', 'default-mode', 'meme-mode');
     clearMemes();
-
     document.body.style.backgroundImage = '';
 
     switch (e.target.value) {
@@ -441,6 +458,7 @@ themeForm.addEventListener('change', (e) => {
   }
 });
 
+// On page load, use the default theme
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('default-mode');
 });
